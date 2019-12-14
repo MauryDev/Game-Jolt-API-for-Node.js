@@ -1,10 +1,10 @@
 {
   "name": "game-jolt-api",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "js/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "echo h"
   },
   "repository": {
     "type": "git",
@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/MauryDev/Game-Jolt-API-for-Node.js/issues"
   },
-  "homepage": "https://github.com/MauryDev/Game-Jolt-API-for-Node.js#readme"
+  "homepage": "https://github.com/MauryDev/Game-Jolt-API-for-Node.js#readme",
+  "dependencies": {
+    "request": "^2.88.0"
+  }
 }
