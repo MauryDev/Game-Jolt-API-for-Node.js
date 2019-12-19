@@ -1,8 +1,9 @@
 {
   "name": "game-jolt-api",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "",
   "main": "js/index.js",
+  "types": "ts/index.d.ts",
   "scripts": {
     "start": "echo h"
   },

@@ -1,7 +1,7 @@
 var request,_key,_gameid;
 function GetRank(sort, table_id, callback) {
     request({
-        url: "/score/get-rank/",
+        url: "/scores/get-rank/",
         _key: _key,
         param: [["game_id", _gameid], ["sort", sort], ["table_id", table_id]]
     }, callback);

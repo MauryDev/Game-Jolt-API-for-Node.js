@@ -4,10 +4,17 @@ function request_api(data, callback) {
     var gamejolt_api_url = "https://api.gamejolt.com/api/game/v1_2";
     gamejolt_api_url = gamejolt_api_url + data.url + "?" + param(data.param);
     gamejolt_api_url += signature(gamejolt_api_url, data._key);
-    request.get(gamejolt_api_url,{
+    request.get(gamejolt_api_url, {
         json: true
-    } ,function (err, res, body) {
-        if (typeof callback === "function") callback(body.response);
+    }, function (err, res, body) {
+        if (typeof callback === "function") {
+            if (res.statusCode === 200) {
+                body.response.success = body.response.success === 'true' ? true : false;
+                callback(body.response);
+            } else {
+                callback({message: res.statusMessage,success: false})
+            }
+        }
     })
 }
 function param(arr) {

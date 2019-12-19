@@ -16,10 +16,23 @@ var tools = {
     RemoveAchieved: require("./tools/RemoveAchieved.js"),
     FetchTrophies: require("./tools/FetchTrophies.js"),
     FetchDataStore: require("./tools/FetchDataStore.js"),
-    FetchTrophies: require("./tools/FetchTrophies.js"),
     GetKeysDataStore: require("./tools/GetKeysDataStore.js"),
     RemoveDataStore: require("./tools/RemoveDataStore.js"),
     SetDataStore: require("./tools/SetDataStore.js"),
+    Batch: function (that) {
+        return function (callback) {
+            let Batchs = []
+            function AddBatch(method, ...args) {
+                Batchs.push([method, args])
+            }
+            callback(AddBatch)
+            return function () {
+                for (let i in Batchs) {
+                    that[Batchs[i][0]].apply(null,Batchs[i][1])
+                }
+            }
+        }
+    },
     UpdateDataStore: require("./tools/UpdateDataStore.js")
 }
 
@@ -32,6 +45,10 @@ module.exports = function (key, game_id) {
     return (function () {
         let tools_ = {}
         for (let i in tools) {
+            if (i == "Batch") {
+                tools_[i] = tools[i](tools_)
+                continue;
+            }
             tools_[i] = tools[i](info)
         }
         return tools_;
